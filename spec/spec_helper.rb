@@ -1,5 +1,6 @@
-require "bundler/setup"
-require "simple_facade"
+require 'bundler/setup'
+require 'pry'
+require 'simple_facade'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
