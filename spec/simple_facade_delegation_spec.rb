@@ -19,5 +19,6 @@ RSpec.describe SimpleFacade do
     expect{ facade.a }.to raise_error(NoMethodError)
     facade.pop
     expect{ facade.c }.to raise_error(NoMethodError)
+    expect(facade.b).to eq 'b'
   end
 end
