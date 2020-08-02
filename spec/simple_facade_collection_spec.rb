@@ -6,7 +6,7 @@ RSpec.describe SimpleFacade do
   end
 
   it 'has collection inside' do
-    expect(facade.instance_variables).to include(:@__sf_collection__)
+    expect(facade.instance_variables).to include(:@subjects)
   end
 
   it 'adds elements to end' do
@@ -51,5 +51,16 @@ RSpec.describe SimpleFacade do
     facade.enqueue(:b, obj2)
     facade.insert(0, :c, obj3)
     expect(facade.members).to eq({a: obj1, c: obj3, b: obj2})
+  end
+
+  it 'removes elements' do
+    obj1 = Object.new
+    obj2 = Object.new
+    obj3 = Object.new
+    facade.enqueue(:a, obj1)
+    facade.enqueue(:b, obj2)
+    facade.enqueue(:c, obj3)
+    facade.delete(:b)
+    expect(facade.members).to eq({a: obj1, c: obj3})
   end
 end
