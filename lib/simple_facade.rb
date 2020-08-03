@@ -11,7 +11,6 @@ module SimpleFacade
       else
         @subjects += attrs.select {|el| el.is_a(Array) && el.size == 2}
       end
-      super
     end
 
     def members
