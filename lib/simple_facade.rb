@@ -18,6 +18,7 @@ module SimpleFacade
     end
 
     def push(k, v)
+      return if v.nil? || k.nil? || key_exists?(k)
       @members = nil
       subjects.push([k, v])
     end
@@ -28,6 +29,7 @@ module SimpleFacade
     end
 
     def enqueue(k, v)
+      return if v.nil? || k.nil? || key_exists?(k)
       @members = nil
       subjects.unshift([k, v])
     end
@@ -38,11 +40,13 @@ module SimpleFacade
     end
 
     def insert(index, k, v)
+      return if v.nil? || k.nil? || index.nil? || key_exists?(k)
       @members = nil
       subjects.insert(index, [k, v])
     end
 
     def delete(key)
+      return if key.nil?
       @members = nil
       subjects.delete_at(subjects.index { |el| el.first == key })
     end
@@ -65,5 +69,9 @@ module SimpleFacade
     private
 
     attr_reader :subjects
+
+    def key_exists?(key)
+      members.keys.include?(key)
+    end
   end
 end
