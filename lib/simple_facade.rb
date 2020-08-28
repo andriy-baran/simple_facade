@@ -14,34 +14,42 @@ module SimpleFacade
     end
 
     def members
-      subjects.to_h
+      @members ||= subjects.to_h
     end
 
     def push(k, v)
+      @members = nil
       subjects.push([k, v])
     end
 
     def pop
+      @members = nil
       subjects.pop
     end
 
     def enqueue(k, v)
+      @members = nil
       subjects.unshift([k, v])
     end
 
     def dequeue
+      @members = nil
       subjects.shift
     end
 
     def insert(index, k, v)
+      @members = nil
       subjects.insert(index, [k, v])
     end
 
     def delete(key)
+      @members = nil
       subjects.delete_at(subjects.index { |el| el.first == key })
     end
 
     def method_missing(method_name, *attrs, &block)
+      member = members[method_name]
+      return member if member
       responder = members.values.detect { |obj| obj.respond_to?(method_name) }
       if responder
         responder.public_send(method_name, *attrs, &block)
