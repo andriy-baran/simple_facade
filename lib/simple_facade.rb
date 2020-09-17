@@ -1,4 +1,5 @@
 require 'simple_facade/version'
+require 'simple_facade/linking'
 
 module SimpleFacade
   class Error < StandardError; end
