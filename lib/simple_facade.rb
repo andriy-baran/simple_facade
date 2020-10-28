@@ -39,6 +39,11 @@ module SimpleFacade
       __subjects__.delete_at(__subjects__.index { |el| el.first == key })
     end
 
+    def facade_reverse
+      @__members__ = nil
+      __subjects__.reverse!
+    end
+
     def method_missing(method_name, *attrs, &block)
       member = __members__[method_name]
       return member if member
@@ -74,8 +79,8 @@ module SimpleFacade
 
     def initialize(*attrs, **options)
       @__subjects__ = []
-      @__subjects__ += options.to_a
       @__subjects__ += attrs.select {|el| el.is_a?(Array) && el.size == 2}
+      @__subjects__ += options.to_a
     end
 
     attr_reader :__subjects__

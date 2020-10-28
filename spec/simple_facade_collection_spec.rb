@@ -63,4 +63,16 @@ RSpec.describe SimpleFacade do
     facade.facade_delete(:b)
     expect(facade.send(:__subjects__)).to eq([[:c, obj3], [:a, obj1], [:d, 'e'], [:f, 'g']])
   end
+
+  it 'reverses order of elements' do
+    obj1 = Object.new
+    obj2 = Object.new
+    obj3 = Object.new
+    facade.facade_enqueue(:a, obj1)
+    facade.facade_enqueue(:b, obj2)
+    facade.facade_enqueue(:c, obj3)
+    facade.facade_delete(:b)
+    facade.facade_reverse
+    expect(facade.send(:__subjects__)).to eq([[:f, 'g'], [:d, 'e'], [:a, obj1], [:c, obj3]])
+  end
 end
